@@ -42,19 +42,8 @@
       login_host: test.c74u48myg45e.us-east-1.rds.amazonaws.com
       state: present
 
-  # - name: select query to test_db with named_args
-  #   community.mysql.mysql_query:
-  #     login_db: "{{ db_name }}"
-  #     login_user: admin
-  #     login_password: "{{ password }}"
-  #     login_host: test.c74u48myg45e.us-east-1.rds.amazonaws.com
-  #     query: "{{ item }}"
-  #   with_items:
-  #     - "{{ table1 }}"
-  #     - "{{ table2 }}"
-
-  - name: insert query to test_db with named_args
-    community.mysql.mysql_query:
+  - name: select query to test_db with named_args
+    community.mysql.nysql_query:
       login_db: "{{ db_name }}"
       login_user: admin
       login_password: "{{ password }}"
