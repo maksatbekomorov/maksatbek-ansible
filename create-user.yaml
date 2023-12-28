@@ -1,0 +1,48 @@
+---
+- hosts: tag_role_backend
+  vars:
+    db_name: USERS
+    table1: >-
+      CREATE TABLE IF NOT EXISTS UsersTBL (      
+        Name VARCHAR(50) NOT NULL,
+        SecondName VARCHAR(50) NOT NULL,
+        Login VARCHAR(50) NOT NULL,
+        Password VARCHAR(50) NOT NULL,       
+        PRIMARY KEY)
+      );
+    insert_table1: >-
+      INSERT INTO UsersTBL (Name, SecondName, Login, Password)
+        VALUES ('Maks', 'Maksov', 'maks123', 'pass123'),
+        ('Madina', 'Madinova', 'madi123', 'pass123'),
+        ('Meder', 'Mederov', 'meder123', 'pass123'),
+        ('akyl', 'akylov', 'akyl123', 'akyl123'),
+        ('nura', 'nurova', 'nura123', 'nura123');
+
+  tasks:
+  - name: create myapp database
+    mysql_db:
+      name: "{{ db_name }}"
+      login_user: admin
+      login_password: "{{ password }}"
+      login_host: test.c74u48myg45e.us-east-1.rds.amazonaws.com
+      state: present
+
+  - name: select query to test_db with named_args
+    community.mysql.mysql_query:
+      login_db: "{{ db_name }}"
+      login_user: admin
+      login_password: "{{ password }}"
+      login_host: test.c74u48myg45e.us-east-1.rds.amazonaws.com
+      query: "{{ item }}"
+    with_items:
+      - "{{ table1 }}"
+  
+  - name: insert query to test_db with named_args
+    community.mysql.mysql_query:
+      login_db: "{{ db_name }}"
+      login_user: admin
+      login_password: "{{ password }}"
+      login_host: test.c74u48myg45e.us-east-1.rds.amazonaws.com
+      query: "{{ item }}"
+    with_items:
+      - "{{ insert_table1 }}"
