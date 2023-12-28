@@ -30,7 +30,7 @@
       state: present
 
   - name: select query to test_db with named_args
-    community.mysql.nysql_query:
+    community.mysql.mysql_query:
       login_db: "{{ db_name }}"
       login_user: admin
       login_password: "{{ password }}"
