@@ -1,0 +1,6 @@
+---
+- hosts: tag_role_flask
+  become: true
+  gather_facts: false
+  roles:
+   - flask-simple
