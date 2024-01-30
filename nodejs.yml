@@ -1,7 +1,9 @@
 ---
 
-- hosts: tag_Name_host1
+- hosts: localhost
+  connection: local
   become: true
+  gather_facts: false
   roles:
     - nodejs
   # vars:
