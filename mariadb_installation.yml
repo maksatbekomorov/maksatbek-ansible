@@ -4,6 +4,7 @@
   become: true
   vars:
     msi_mysql_root_pass: ''
+    password: "password" 
 
   tasks:
   - name: Install Utility software
